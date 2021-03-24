@@ -45,6 +45,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.Provider;
 
+import com.adapters.srv.CcServiceRequestProcessor;
 import org.apache.ofbiz.base.util.UtilMisc;
 import org.apache.ofbiz.base.util.UtilValidate;
 import org.apache.ofbiz.entity.GenericEntityException;
@@ -53,7 +54,6 @@ import org.apache.ofbiz.service.GenericServiceException;
 import org.apache.ofbiz.service.LocalDispatcher;
 import org.apache.ofbiz.service.ModelService;
 import org.apache.ofbiz.ws.rs.ApiServiceRequest;
-import org.apache.ofbiz.ws.rs.ServiceRequestProcessor;
 import org.apache.ofbiz.ws.rs.annotation.ServiceRequestValidator;
 import org.apache.ofbiz.ws.rs.response.Success;
 import org.apache.ofbiz.ws.rs.security.Secured;
@@ -113,7 +113,7 @@ public class OFBizServiceResource extends OFBizResource {
     @Secured
     public Response doGet(@QueryParam(value = "inParams") ApiServiceRequest serviceRequest,
             @PathParam(value = "serviceName") String serviceName) throws IOException, GenericServiceException {
-        ServiceRequestProcessor processor = new ServiceRequestProcessor();
+        CcServiceRequestProcessor processor = new CcServiceRequestProcessor();
         return processor.process(UtilMisc.toMap("serviceName", serviceName, "httpVerb", HttpMethod.GET, "requestMap",
                 serviceRequest.getInParams(), "dispatcher", getDispatcher(), "request", httpRequest));
     }
@@ -135,7 +135,7 @@ public class OFBizServiceResource extends OFBizResource {
         if (UtilValidate.isEmpty(serviceInParams)) {
             throw new BadRequestException("The request body is missing.");
         }
-        ServiceRequestProcessor processor = new ServiceRequestProcessor();
+        CcServiceRequestProcessor processor = new CcServiceRequestProcessor();
         return processor.process(UtilMisc.toMap("serviceName", serviceName, "httpVerb", HttpMethod.POST, "requestMap",
                 serviceInParams, "dispatcher", getDispatcher(), "request", httpRequest));
     }
@@ -156,7 +156,7 @@ public class OFBizServiceResource extends OFBizResource {
         if (UtilValidate.isEmpty(serviceInParams)) {
             throw new BadRequestException("The request body is missing.");
         }
-        ServiceRequestProcessor processor = new ServiceRequestProcessor();
+        CcServiceRequestProcessor processor = new CcServiceRequestProcessor();
         return processor.process(UtilMisc.toMap("serviceName", serviceName, "httpVerb", HttpMethod.PUT, "requestMap",
                 serviceInParams, "dispatcher", getDispatcher(), "request", httpRequest));
     }
@@ -178,7 +178,7 @@ public class OFBizServiceResource extends OFBizResource {
         if (UtilValidate.isEmpty(serviceInParams)) {
             throw new BadRequestException("The request body is missing.");
         }
-        ServiceRequestProcessor processor = new ServiceRequestProcessor();
+        CcServiceRequestProcessor processor = new CcServiceRequestProcessor();
         return processor.process(UtilMisc.toMap("serviceName", serviceName, "httpVerb", HttpMethod.PATCH, "requestMap",
                 serviceInParams, "dispatcher", getDispatcher(), "request", httpRequest));
     }
@@ -200,7 +200,7 @@ public class OFBizServiceResource extends OFBizResource {
         if (UtilValidate.isEmpty(serviceInParams)) {
             throw new BadRequestException("The request body is missing.");
         }
-        ServiceRequestProcessor processor = new ServiceRequestProcessor();
+        CcServiceRequestProcessor processor = new CcServiceRequestProcessor();
         return processor.process(UtilMisc.toMap("serviceName", serviceName, "httpVerb", HttpMethod.DELETE, "requestMap",
                 serviceInParams, "dispatcher", getDispatcher(), "request", httpRequest));
     }
