@@ -136,8 +136,9 @@ public class OFBizServiceResource extends OFBizResource {
             throw new BadRequestException("The request body is missing.");
         }
         CcServiceRequestProcessor processor = new CcServiceRequestProcessor();
-        return processor.process(UtilMisc.toMap("serviceName", serviceName, "httpVerb", HttpMethod.POST, "requestMap",
-                serviceInParams, "dispatcher", getDispatcher(), "request", httpRequest));
+        return processor.process(UtilMisc.toMap("serviceName", serviceName,
+                "httpVerb", HttpMethod.POST, "requestMap", serviceInParams,
+                "dispatcher", getDispatcher(), "request", httpRequest));
     }
 
     /**
