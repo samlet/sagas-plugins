@@ -38,11 +38,11 @@ under the License.
     </eca>
     <!-- Load data into the SalesOrderItemFact olap entity when a sales order is set to ready -->
     <!-- TODO: there are two eca for the same order status change: one of the two should be removed -->
-    <eca service="setOrderStatus" event="commit">
-        <condition field-name="statusId" operator="equals" value="ITEM_APPROVED"/>
-        <condition-field field-name="statusId" operator="not-equals" to-field-name="oldStatusId"/>
-        <action service="loadSalesOrderFact" mode="async" run-as-user="system"/>
-    </eca>
+<!--    <eca service="setOrderStatus" event="commit">-->
+<!--        <condition field-name="statusId" operator="equals" value="ITEM_APPROVED"/>-->
+<!--        <condition-field field-name="statusId" operator="not-equals" to-field-name="oldStatusId"/>-->
+<!--        <action service="loadSalesOrderFact" mode="async" run-as-user="system"/>-->
+<!--    </eca>-->
     <eca service="changeOrderItemStatus" event="commit">
         <condition field-name="statusId" operator="equals" value="ITEM_APPROVED"/>
         <condition-field field-name="statusId" operator="not-equals" to-field-name="oldStatusId"/>
